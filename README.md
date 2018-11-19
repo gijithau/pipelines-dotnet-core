@@ -1,3 +1,4 @@
+[![Build Status](https://gijithau.visualstudio.com/GitSample/_apis/build/status/GitSample-CI)](https://gijithau.visualstudio.com/GitSample/_build/latest?definitionId=4)
 # Sample ASP.NET Core application for Azure Pipelines docs
 
 For information on how to use this repository, see [.NET Core](https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core).
