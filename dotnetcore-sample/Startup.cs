@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 using System.IO;
+using dotnetcore_sample.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnetcore_sample
 {
@@ -34,6 +36,8 @@ namespace dotnetcore_sample
         {
             // Add framework services.
             services.AddMvc();
+            var connection = @"Data Source=DESKTOP-ELJABC0;Initial Catalog=test_db;Persist Security Info=True;User ID=testuser;Password=testuser@123";
+            services.AddDbContext<test_dbContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
