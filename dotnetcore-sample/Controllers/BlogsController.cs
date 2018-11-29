@@ -56,8 +56,8 @@ namespace dotnetcore_sample.Controllers
         public async Task<IActionResult> Create([Bind("BlogId,Url")] Blog blog)
         {
             if (ModelState.IsValid)
-            {
-                _context.Add(blog);
+            {  _context.Add(blog);
+              
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

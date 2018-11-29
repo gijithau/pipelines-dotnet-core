@@ -11,31 +11,25 @@ using System.Reflection;
 using System.IO;
 using dotnetcore_sample.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetcore_sample
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string appSettingsFilePath = Path.Combine(assemblyFolder,"appsettings.json");
-
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile(appSettingsFilePath, optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             var connection = @"Data Source=DESKTOP-ELJABC0;Initial Catalog=test_db;Persist Security Info=True;User ID=testuser;Password=testuser@123";
             services.AddDbContext<test_dbContext>(options => options.UseSqlServer(connection));
         }
